@@ -298,4 +298,5 @@ HEALTHCHECK --interval=3m --timeout=10s --start-period=15s --retries=3 \
 # Old
 # CMD ["node", "openclaw.mjs", "gateway", "--allow-unconfigured"]
 # New
-CMD ["node", "openclaw.mjs", "gateway", "--bind", "lan", "--port", "18789", "--allow-unconfigured"]
+# CMD ["node", "openclaw.mjs", "gateway", "--bind", "lan", "--port", "18789", "--allow-unconfigured"]
+CMD node openclaw.mjs gateway --bind lan --port 18789 --allow-unconfigured
