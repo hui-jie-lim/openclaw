@@ -271,8 +271,16 @@ ENV NODE_ENV=production
 
 # --- FIX START ---
 # Switch to root to ensure the volume directory exists and is writable
+# Switch to root to ensure the volume directory exists and is writable
 USER root
-RUN mkdir -p /data/.openclaw /data/workspace && chown -R node:node /data
+RUN mkdir -p /data/.openclaw /data/workspace
+
+# This creates the file that fixes the "non-loopback Control UI" security error
+RUN echo 'gateway:' > /data/.openclaw/config.yaml && \
+    echo '  controlUi:' >> /data/.openclaw/config.yaml && \
+    echo '    dangerouslyAllowHostHeaderOriginFallback: true' >> /data/.openclaw/config.yaml
+
+RUN chown -R node:node /data
 # --- FIX END ---
 
 # Security hardening: Run as non-root user
